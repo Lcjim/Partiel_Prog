@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// structure du tupe de la voiture
+typedef struct Voiture {
+    char marque[50];
+    char modele[50];
+    int annee;
+    struct Voiture *suivant;
+} Voiture;
+
+Voiture *ajouter(Voiture *tete, char *marque, char *modele, int annee) {
+    Voiture *nv = (Voiture *)malloc(sizeof(Voiture));
+    strcpy(nv->marque, marque);
+    strcpy(nv->modele, modele);
+    nv->annee = annee;
+    nv->suivant = tete;
+    return nv;
+}
+
+Voiture *supprimerModele(Voiture *tete, char *modele) {
+    Voiture *c = tete;
+    Voiture *p = NULL;
+
+    while (c != NULL) {
+        if (strcmp(c->modele, modele) == 0) {
+            if (p == NULL) {
+                tete = c->suivant;
+            } else {
+                p->suivant = c->suivant;
+            }
+            free(c);
+            return tete;
+        }
+        p = c;
+        c = c->suivant;
+    }
+    return tete;
+}
+
+void afficher(Voiture *tete) {
+    printf("Liste de voitures :\n");
+    while (tete != NULL) {
+        printf("Marque : %s, Modèle : %s, Année : %d\n", tete->marque, tete->modele, tete->annee);
+        tete = tete->suivant;
+    }
+}
+
+int main() {
+    Voiture *liste = NULL;
+    liste = ajouter(liste, "Toyota", "Corolla", 2015);
+    liste = ajouter(liste, "Honda", "Civic", 2018);
+    liste = ajouter(liste, "Ford", "Fusion", 2016);
+    //affiche liste
+    afficher(liste);
+
+    // efface voiture
+    liste = supprimerModele(liste, "Civic");
+
+    //mise a jour de la liste
+    afficher(liste);
+
+    return 0;
+}
+
