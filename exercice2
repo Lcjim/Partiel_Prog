@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+//structure de la personne
+struct Personne {
+    char nom[50];
+    int age;
+    float taille;
+};
+
+int main() {
+
+    struct Personne personnes[2];
+    struct Personne *ptr_personne = personnes;
+
+    printf("Vous avez une limite 2 personnes maximum à ajouter sur le tableau\n");
+
+    printf("Entrez les données pour la personne 1 :\n");
+    printf("Nom : ");
+    scanf("%s", ptr_personne->nom);
+    printf("Age : ");
+    scanf("%d", &ptr_personne->age);
+    printf("Taille : ");
+    scanf("%f", &ptr_personne->taille);
+
+    ptr_personne++; //passe a la prochaine personne du tableau
+
+    printf("\nEntrez les données pour la personne 2 :\n");
+    printf("Nom : ");
+    scanf("%s", ptr_personne->nom);
+    printf("Age : ");
+    scanf("%d", &ptr_personne->age);
+    printf("Taille : ");
+    scanf("%f", &ptr_personne->taille);
+
+    // affiche les données des personnes
+    ptr_personne = personnes;
+
+    printf("\nAffichage des données :\n");
+    for (int i = 0; i < 2; i++) {
+        printf("Personne %d :\n", i+1);
+        printf("Nom : %s\n", ptr_personne->nom);
+        printf("Age : %d\n", ptr_personne->age);
+        printf("Taille : %.2f\n", ptr_personne->taille);
+        ptr_personne++; // Passer à la prochaine personne dans le tableau
+    }
+
+    return 0;
+}
+
+
