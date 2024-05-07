@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int a = 5, b = 10;
+    int *ptr_a = &a, *ptr_b = &b;
+
+    printf(" Before exchange (avant l'echange) :\n");
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
+
+    // échange les valeurs grâce aux pointeurds
+    *ptr_a = *ptr_a + *ptr_b;
+    *ptr_b = *ptr_a - *ptr_b;
+    *ptr_a = *ptr_a - *ptr_b;
+
+    printf("\n  After exchange :\n");
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
+
+    return 0;
+}
